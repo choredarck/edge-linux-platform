@@ -3,5 +3,53 @@ services:
     image: eclipse-mosquitto:2
     container_name: eg_mqtt
     ports:
-      - "1883:1883"
+      - "${MQTT_PORT}:1883"
+    volumes:
+      - ./configs/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ./configs/mosquitto/pwfile:/mosquitto/config/pwfile:ro
+      - ./volumes/mosquitto/data:/mosquitto/data
+      - ./volumes/mosquitto/log:/mosquitto/log
     restart: unless-stopped
+
+  mariadb:
+    image: mariadb:11
+    container_name: eg_db
+    environment:
+      - MARIADB_DATABASE=${DB_NAME}
+      - MARIADB_USER=${DB_USER}
+      - MARIADB_PASSWORD=${DB_PASS}
+      - MARIADB_ROOT_PASSWORD=${DB_ROOT_PASS}
+    ports:
+      - "${DB_PORT}:3306"
+    volumes:
+      - eg_db_data:/var/lib/mysql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h 127.0.0.1 -u root -p$${DB_ROOT_PASS} --silent"]
+      interval: 10s
+      timeout: 3s
+      retries: 15
+
+  data-ingestor:
+    build:
+      context: ../services/data-ingestor
+    container_name: eg_ingestor
+    environment:
+      - PYTHONUNBUFFERED=1
+      - MQTT_HOST=mqtt-broker
+      - MQTT_PORT=1883
+      - MQTT_USER=${MQTT_USER}
+      - MQTT_PASS=${MQTT_PASS}
+      - MQTT_IN_TOPIC=${MQTT_IN_TOPIC}
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+    depends_on:
+      - mqtt-broker
+      - mariadb
+    restart: unless-stopped
+
+volumes:
+  eg_db_data:
