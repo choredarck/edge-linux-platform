@@ -6,6 +6,11 @@
 !.env.example
 
 ####################################
+# Secrets / Mosquito
+####################################
+stack/configs/mosquitto/pwfile
+
+####################################
 # Vagrant / VirtualBox
 ####################################
 .vagrant/
