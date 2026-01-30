@@ -1,1 +1,17 @@
-* text=auto eol
+# Default: normalize all text files to LF
+* text=auto eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+
+# Docker / Compose / YAML
+Dockerfile text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Python
+*.py text eol=lf
+
+# Env examples
+*.env text eol=lf
+*.env.example text eol=lf
