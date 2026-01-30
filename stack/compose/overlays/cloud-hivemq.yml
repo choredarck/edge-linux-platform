@@ -1,0 +1,24 @@
+services:
+  cloud-connector:
+    build:
+      context: /vagrant/services/cloud-connector
+    container_name: eg_cloud_connector
+    environment:
+      # --- Edge/local broker (inside Docker network) ---
+      - EDGE_MQTT_HOST=mqtt-broker
+      - EDGE_MQTT_PORT=1883
+      - EDGE_MQTT_USER=${MQTT_USER}
+      - EDGE_MQTT_PASS=${MQTT_PASS}
+      - EDGE_TOPIC=${MQTT_INTERNAL_TOPIC}
+
+      # --- Cloud broker (HiveMQ Cloud) ---
+      - CLOUD_MQTT_HOST=${CLOUD_MQTT_HOST}
+      - CLOUD_MQTT_PORT=${CLOUD_MQTT_PORT}
+      - CLOUD_MQTT_USER=${CLOUD_MQTT_USER}
+      - CLOUD_MQTT_PASS=${CLOUD_MQTT_PASS}
+      - CLOUD_TLS=${CLOUD_TLS}
+      - CLOUD_TOPIC=${CLOUD_TOPIC}
+
+    depends_on:
+      - mqtt-broker
+    restart: unless-stopped

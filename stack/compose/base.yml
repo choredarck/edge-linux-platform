@@ -1,17 +1,19 @@
 services:
   mqtt-broker:
     image: eclipse-mosquitto:2
+    container_name: eg_mqtt
     ports:
       - "${MQTT_PORT}:1883"
     volumes:
-      - ./configs/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
-      - ./configs/mosquitto/pwfile:/mosquitto/config/pwfile:ro
-      - ./volumes/mosquitto/data:/mosquitto/data
-      - ./volumes/mosquitto/log:/mosquitto/log
+      - ../configs/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ../configs/mosquitto/pwfile:/mosquitto/config/pwfile:ro
+      - ../volumes/mosquitto/data:/mosquitto/data
+      - ../volumes/mosquitto/log:/mosquitto/log
     restart: unless-stopped
 
   mariadb:
     image: mariadb:11
+    container_name: eg_db
     environment:
       - MARIADB_DATABASE=${DB_NAME}
       - MARIADB_USER=${DB_USER}
@@ -30,7 +32,8 @@ services:
 
   data-ingestor:
     build:
-      context: ../services/data-ingestor
+      context: ../../services/data-ingestor
+    container_name: eg_ingestor
     environment:
       - PYTHONUNBUFFERED=1
       - MQTT_HOST=mqtt-broker
