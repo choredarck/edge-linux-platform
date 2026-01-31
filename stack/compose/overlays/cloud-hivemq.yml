@@ -2,7 +2,6 @@ services:
   cloud-connector:
     build:
       context: /vagrant/services/cloud-connector
-    container_name: eg_cloud_connector
     environment:
       # --- Edge/local broker (inside Docker network) ---
       - EDGE_MQTT_HOST=mqtt-broker

@@ -1,7 +1,6 @@
 services:
   mqtt-broker:
     image: eclipse-mosquitto:2
-    container_name: eg_mqtt
     ports:
       - "${MQTT_PORT}:1883"
     volumes:
@@ -13,7 +12,6 @@ services:
 
   mariadb:
     image: mariadb:11
-    container_name: eg_db
     environment:
       - MARIADB_DATABASE=${DB_NAME}
       - MARIADB_USER=${DB_USER}
@@ -22,7 +20,7 @@ services:
     ports:
       - "${DB_PORT}:3306"
     volumes:
-      - eg_db_data:/var/lib/mysql
+      - db_data:/var/lib/mysql
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "mariadb-admin ping -h 127.0.0.1 -u root -p$${DB_ROOT_PASS} --silent"]
@@ -33,7 +31,6 @@ services:
   data-ingestor:
     build:
       context: ../../services/data-ingestor
-    container_name: eg_ingestor
     environment:
       - PYTHONUNBUFFERED=1
       - MQTT_HOST=mqtt-broker
@@ -52,4 +49,4 @@ services:
     restart: unless-stopped
 
 volumes:
-  eg_db_data:
+  db_data:
