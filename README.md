@@ -1,19 +1,19 @@
-# EGS-BASE — Edge Gateway Stack (Base Platform)
+# ELP-BASE — Edge Linux Platform (Base Platform)
 
-EGS-BASE is a reusable **Edge Gateway base platform** designed for industrial IoT and edge computing scenarios.
+ELP-BASE is a reusable **Edge Linux Platform base platform** designed for industrial IoT and edge computing scenarios.
 
-This repository provides a **clean, portable and extensible foundation** for building edge gateway products, separating **platform capabilities** from **project-specific configuration and features**.
+This repository provides a **clean, portable and extensible foundation** for building Edge Linux Platform products, separating **platform capabilities** from **project-specific configuration and features**.
 
-EGS-BASE is **not a final product**.  
+ELP-BASE is **not a final product**.  
 It is intended to be consumed and extended by downstream projects via Git subtrees.
 
 ---
 
 ## 🎯 Project Goals
 
-The main goals of EGS-BASE are:
+The main goals of ELP-BASE are:
 
-- Provide a **reusable edge gateway platform**, not a single-purpose solution
+- Provide a **reusable Edge Linux Platform platform**, not a single-purpose solution
 - Enforce a clear separation between:
   - **Capabilities (platform)**
   - **Configuration (projects / environments)**
@@ -26,7 +26,7 @@ The main goals of EGS-BASE are:
 
 ## 🧠 Architectural Principles
 
-EGS-BASE follows these core principles:
+ELP-BASE follows these core principles:
 
 ### Capability vs Configuration
 - The platform defines **what the gateway can do**
@@ -137,7 +137,7 @@ Cloud connectivity is enabled only when the overlay is explicitly included.
 
 ## 🧱 Extensibility Model
 
-EGS-BASE is designed to be extended via:
+ELP-BASE is designed to be extended via:
 
 - Git subtrees for downstream projects
 - Additional Docker Compose overlays
