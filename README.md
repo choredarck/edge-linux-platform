@@ -1,6 +1,6 @@
-# ELP-BASE — Edge Linux Platform (Base Platform)
+# ELP-BASE — Edge Linux Platform (Base)
 
-ELP-BASE is a reusable **Edge Linux Platform base platform** designed for industrial IoT and edge computing scenarios.
+ELP-BASE is a reusable **Edge Linux Platform Base** designed for industrial IoT and edge computing scenarios.
 
 This repository provides a **clean, portable and extensible foundation** for building Edge Linux Platform products, separating **platform capabilities** from **project-specific configuration and features**.
 
@@ -159,7 +159,7 @@ Examples of downstream extensions (not included here):
 
 ## ⚠️ Disclaimer
 
-This repository represents a **base platform**, not a complete solution.
+This repository represents a **Base**, not a complete solution.
 
 Downstream projects are expected to:
 - Provide their own configuration
