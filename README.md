@@ -165,3 +165,11 @@ Downstream projects are expected to:
 - Provide their own configuration
 - Enable only required capabilities
 - Add project-specific documentation
+
+## Core vs Overlays
+- Core: compose/base.yml
+- Overlays: compose/overlays/*.yml
+
+```bash
+docker compose --env-file .env -f compose/base.yml [ -f compose/overlays/<x>.yml ] up -d
+```

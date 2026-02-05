@@ -72,3 +72,9 @@ dist/
 build/
 *.tar.gz
 *.zip
+
+####################################
+# WireGuard secrets
+####################################
+stack/configs/wireguard/wg0.conf
+stack/configs/wireguard/keys/
