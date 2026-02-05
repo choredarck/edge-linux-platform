@@ -1,0 +1,14 @@
+[Interface]
+Address = 10.8.0.2/24
+PrivateKey = <REPLACE_ME>
+DNS = 1.1.1.1
+
+# (Opcional) si quieres que al levantar WG se activen reglas:
+# PostUp = ...
+# PostDown = ...
+
+[Peer]
+PublicKey = <SERVER_PUBLIC_KEY>
+AllowedIPs = 0.0.0.0/0, ::/0
+Endpoint = <SERVER_PUBLIC_IP>:51820
+PersistentKeepalive = 25

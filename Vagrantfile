@@ -8,6 +8,15 @@ Vagrant.configure("2") do |config|
     vb.cpus = 2
   end
 
-  config.vm.network "forwarded_port", guest: 22, host: 2222, id: "ssh", auto_correct: true
+  # SSH
+  config.vm.network "forwarded_port",
+    guest: 22, host: 2222,
+    id: "ssh", auto_correct: true
+
+  # WireGuard (UDP)
+  config.vm.network "forwarded_port",
+    guest: 51820, host: 51820,
+    protocol: "udp"
+
   config.vm.provision "shell", path: "provision/bootstrap.sh"
 end
